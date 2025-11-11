@@ -34,13 +34,22 @@ A secure and user-friendly **banking web application** built with **Flask**, fea
 ---
 
 ## 📸 Screenshots
+Page	Screenshot
+🏠 Login Page	
 
-| Page | Screenshot |
-|------|-------------|
-| Login Page | ![Login](screenshots/login.png) |
-| Dashboard | ![Dashboard](screenshots/dashboard.png) |
-| Profile | ![Profile](screenshots/profile.png) |
-| Forgot Password | ![Forgot Password](screenshots/forgot_password.png) |
+🧾 Dashboard	
+
+👤 Profile Page	
+
+📝 Signup Page	
+
+🔁 Forgot Password	
+
+🔐 Reset Password	
+
+💸 Fund Transfer Page	
+
+💳 Transactions Page	
 
 > 📂 screenshots inside the `/screenshots` folder.
 
@@ -95,7 +104,11 @@ mybank-flask-app/
 │   ├── login.png
 │   ├── dashboard.png
 │   ├── profile.png
-│   └── forgot_password.png
+│   ├── forgot_password.png
+│   ├── reset_password.png
+│   ├── fund_transfer.png
+│   ├── transactions.png
+│   └── singup.png
 │
 └── README.md
 

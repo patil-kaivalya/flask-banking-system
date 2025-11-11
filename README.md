@@ -120,7 +120,7 @@ MarkupSafe==3.0.2
 
 
 requirements.txt in my project root.
-
+```
 ✨ Author
 
 👤 Kaivalya Patil

@@ -1,0 +1,17 @@
+services:
+
+  - type: web
+
+    name: flask-banking-system
+
+    env: python
+
+    buildCommand: "pip install -r requirements.txt"
+
+    startCommand: "gunicorn run:app"
+
+    plan: free
+
+    autoDeploy: true
+
+ 

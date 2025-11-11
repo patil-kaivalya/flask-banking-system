@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("/static/images/bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-left: 8%;
+            text-align: left;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 20px 30px;
+            width: 350px;
+            line-height: 1.8;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            text-align: left;
+        }
+
+        .logout-btn {
+            background: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
+            background-size: 200% auto;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-position 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            margin-top: 25px;
+        }
+
+        .logout-btn:hover {
+            background-position: right center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ✅ Navbar goes here -->
+    {% include 'navbar.html' %}
+
+    <h1 id="greeting"></h1>
+    <h1>Welcome to Your Bank Dashboard</h1>
+    <p>Here you can view your account details.</p>
+
+    <div class="user-info">
+        <h3>Account Holder Details</h3>
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Phone:</strong> {{ masked_phone }}</p>
+        <p><strong>Email:</strong> {{ masked_email }}</p>
+    </div>
+    <br>
+    <div class="user-info">
+        <h3>Account Summary</h3>
+        <p><strong>Account No:</strong> {{ account_no }}</p>
+        <p><strong>Balance:</strong> ₹ <span id="balance">0 </span>💰</p>
+    </div>
+
+    <a href="{{ url_for('logout') }}" class="logout-btn">Log Out</a>
+
+    <script>
+        document.querySelector('.logout-btn').addEventListener('click', function (e) {
+            if (!confirm("Are you sure you want to log out?")) {
+                e.preventDefault();
+            }
+        });
+
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            alert("Please log out first before going back!");
+            window.history.pushState(null, "", window.location.href);
+        };
+
+        const hour = new Date().getHours();
+        let greeting = "Welcome";
+        if (hour < 12) greeting = "Good Morning ☀️";
+        else if (hour < 18) greeting = "Good Afternoon 🌤️";
+        else greeting = "Good Evening 🌙";
+        document.getElementById("greeting").innerText = `${greeting}, {{ name }}!`;
+
+        const finalBalance = {{ balance }};
+        const balanceElement = document.getElementById("balance");
+
+        let start = 0;
+        const duration = 2000;
+        const stepTime = 10;
+        const increment = finalBalance / (duration / stepTime);
+
+        const counter = setInterval(() => {
+            start += increment;
+            if (start >= finalBalance) {
+                start = finalBalance;
+                clearInterval(counter);
+            }
+            balanceElement.textContent = start.toLocaleString('en-IN', {
+                maximumFractionDigits: 0
+            });
+        }, stepTime);
+    </script>
+</body>
+</html>

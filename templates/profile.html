@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("/static/images/bank_profile.png") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+
+            /* ✅ Align to left side */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 8%;
+        }
+
+        .profile-box {
+            background: rgba(255, 255, 255, 0.15);
+            width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            line-height: 1.8;
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="profile-box">
+        <h2>User Profile</h2>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Phone:</strong> {{ masked_phone }}</p>
+        <p><strong>Email:</strong> {{ masked_email }}</p>
+        <p><strong>Account No:</strong> {{ account_no }}</p>
+        <p><strong>Balance:</strong> ₹ <span id="balance">0</span> 💰</p>
+    </div>
+
+    <script>
+        // ✅ Animate the balance like in dashboard
+        const finalBalance = {{ balance }};
+        const balanceElement = document.getElementById("balance");
+
+        let start = 0;
+        const duration = 2000;
+        const stepTime = 10;
+        const increment = finalBalance / (duration / stepTime);
+
+        const counter = setInterval(() => {
+            start += increment;
+            if (start >= finalBalance) {
+                start = finalBalance;
+                clearInterval(counter);
+            }
+            balanceElement.textContent = start.toLocaleString('en-IN', {
+                maximumFractionDigits: 0
+            });
+        }, stepTime);
+    </script>
+</body>
+
+</html>

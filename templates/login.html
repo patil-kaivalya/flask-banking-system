@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Bank Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  
+
+
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>Bank Login</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flashes">
+      {% for category, message in messages %}
+      <div class="flash flash-{{ category }}">{{ message|safe }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <div class="input-group">
+        <input type="text" name="email_id" id="email_id" placeholder=" " required>
+        <label for="email_id">Username</label>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" id="password" placeholder=" " required>
+        <label for="password">Password</label>
+        <span class="toggle-password" onclick="showPassword()">&#128065;</span>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="extra-links">
+      <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+      <p>Don't have an account? <br> <a href="{{ url_for('signup') }}">Sign up</a></p>
+    </div>
+  </div>
+</body>
+<script>
+function showPassword() {
+  const passwordField = document.getElementById("password");
+  passwordField.type = "text";
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    passwordField.type = "password";
+  }, 3000);
+}
+</script>
+
+</html>

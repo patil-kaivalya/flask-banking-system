@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Transactions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("/static/images/bg.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: rgb(255, 255, 255);
+            margin: 0;
+            text-align: center;
+        }
+
+        table {
+            margin: 120px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ✅ Status color black */
+        .color {
+            color: black;
+            font-weight: bold;
+        }
+
+        a {
+            color: #26a0da;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount (₹)</th>
+            <th>Status</th>
+        </tr>
+        {% for txn in transactions %}
+        <tr>
+            <td>{{ txn.date }}</td>
+            <td>{{ txn.type }}</td>
+            <td>{{ txn.amount }}</td>
+            <td class="color">{{ txn.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

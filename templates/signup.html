@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bank Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* 🔹 Input group positioning */
+        .input-group {
+            position: relative;
+        }
+
+        /* 👁 Eye icon */
+        .toggle-password {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #ccc;
+            font-size: 16px;
+        }
+
+        /* ℹ️ Info icon */
+        .info-icon {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #f44336;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* 🟦 Popup message — enlarged and clearer */
+        .info-popup {
+            display: none;
+            position: absolute;
+            background: rgba(44, 62, 80, 0.95);
+            color: #fff;
+            padding: 18px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.6;
+            width: 300px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            top: -20px;
+            left: 110%;
+        }
+
+        .info-popup::before {
+            content: "";
+            position: absolute;
+            left: -6px;
+            top: 25px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 6px solid rgba(44, 62, 80, 0.95);
+        }
+
+        /* Hover show popup */
+        .info-icon:hover + .info-popup {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Create Account</h2>
+
+        <form method="POST" class="two-column-form">
+            <!-- Left Column -->
+            <div class="form-column">
+                <div class="input-group">
+                    <input type="text" name="name" id="signup-name" required placeholder=" ">
+                    <label for="signup-name">Full Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="address" id="signup-address" required placeholder=" ">
+                    <label for="signup-address">Address</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="phone_no" id="signup-phone" required pattern="[0-9]{10}"
+                        title="Enter valid 10-digit number" placeholder=" ">
+                    <label for="signup-phone">Phone Number</label>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="form-column">
+                <div class="input-group">
+                    <input type="email" name="email_id" id="signup-email" required placeholder=" ">
+                    <label for="signup-email">Email ID</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" name="password" id="signup-password" required placeholder=" "
+                        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$"
+                        title="Password must contain at least 8 characters, including letters, numbers, and one symbol.">
+                    <label for="signup-password">Password</label>
+
+                    <!-- 👁 Eye + ℹ️ Info (aligned right) -->
+                    <span class="toggle-password" onclick="showPassword('signup-password')">&#128065;</span>
+                    <span class="info-icon">&#9432;</span>
+
+                    <!-- 💬 Enlarged popup -->
+                    <div class="info-popup">
+                        <strong>Password must have:</strong><br>
+                        • At least <b>8 characters</b><br>
+                        • At least <b>1 letter</b> (A-Z or a-z)<br>
+                        • At least <b>1 number</b> (0-9)<br>
+                        • At least <b>1 special symbol</b> (@, $, !, %, *, #, ?, &)
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" name="repassword" id="signup-repassword" required placeholder=" ">
+                    <label for="signup-repassword">Re-enter Password</label>
+                    <span class="toggle-password" onclick="showPassword('signup-repassword')">&#128065;</span>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+
+        <p>Already have an account?<br>
+            <a href="{{ url_for('login') }}">Login</a>
+        </p>
+    </div>
+
+    <script>
+        // 👁 Show / Hide Password
+        function showPassword(id) {
+            const field = document.getElementById(id);
+            field.type = field.type === "password" ? "text" : "password";
+        }
+
+        // ✅ Password match validation
+        const password = document.getElementById("signup-password");
+        const repassword = document.getElementById("signup-repassword");
+
+        repassword.addEventListener("input", function () {
+            if (repassword.value && repassword.value === password.value) {
+                repassword.style.borderColor = "green";
+            } else {
+                repassword.style.borderColor = "red";
+            }
+        });
+    </script>
+</body>
+
+</html>

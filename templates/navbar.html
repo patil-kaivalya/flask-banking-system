@@ -1,0 +1,30 @@
+<nav style="
+    background: rgba(0,0,0,0.6);
+    padding: 5px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    box-sizing: border-box;
+">
+    <!-- ✅ Logo + Text -->
+    <div class="logo" style="display: flex; align-items: center; gap: 10px; font-size:22px; font-weight:bold;">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" 
+             alt="Bank Logo" 
+             style="height: 35px; width: 35px; border-radius: 50%;">
+        Patil's_Bank
+    </div>
+
+    <ul style="list-style:none;display:flex;gap:30px;margin:0;">
+        <li><a href="{{ url_for('dashboard') }}" style="color:white;text-decoration:none;">Dashboard</a></li>
+        <li><a href="{{ url_for('transactions') }}" style="color:white;text-decoration:none;">Transactions</a></li>
+        <li><a href="{{ url_for('transfer') }}" style="color:white;text-decoration:none;">Fund Transfer</a></li>
+        <li><a href="{{ url_for('profile') }}" style="color:white;text-decoration:none;">Profile</a></li>
+        <li><a href="{{ url_for('logout') }}" style="color:white;text-decoration:none;">Logout</a></li>
+    </ul>
+</nav>

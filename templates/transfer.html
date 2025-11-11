@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fund Transfer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("/static/images/transfer_funds.png") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+
+        .transfer-form {
+            margin: 120px auto;
+            width: 400px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        input,
+        button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #26a0da;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #314755;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="transfer-form">
+        <h2>Fund Transfer</h2>
+        <form>
+            <input type="text" placeholder="Recipient Account Number" required><br>
+            <input type="number" placeholder="Amount (₹)" required><br>
+            <input type="text" placeholder="Remarks (optional)"><br>
+            <button type="submit">Transfer</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Bank Dashboard</title>
     <style>
@@ -10,15 +11,16 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-
             color: white;
             margin: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: flex-start;
             min-height: 100vh;
             padding-left: 8%;
+            padding-top: 100px;
+            /* ✅ Added to avoid navbar overlap */
             text-align: left;
         }
 
@@ -61,6 +63,7 @@
             background-position: right center;
         }
     </style>
+
 </head>
 
 <body>
@@ -127,4 +130,5 @@
         }, stepTime);
     </script>
 </body>
+
 </html>

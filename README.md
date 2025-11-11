@@ -60,7 +60,7 @@ Page	Screenshot
 Follow these simple steps to run the project locally 👇  
 
 ### 1️⃣ Clone the repository
-```bash ```
+```bash
 git clone https://github.com/patil-kaivalya/flask-banking-system
 cd mybank-flask-app
 
